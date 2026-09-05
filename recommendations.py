@@ -4,7 +4,7 @@ def split_values(text):
     if not text:
         return set()
 
-    return set(text.lower().split(";"))
+    return {value.strip().lower() for value in text.split(";")}
 
 
 def recommend_games(game_name, limit=5):
