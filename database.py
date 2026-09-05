@@ -63,3 +63,65 @@ def search_by_max_price(price):
     connection.close()
 
     return results
+
+
+def search_by_min_rating(rating):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT name, genres, rating_percent, price
+        FROM games
+        WHERE rating_percent >= ?
+        ORDER BY rating_percent DESC
+        LIMIT 20
+        """,
+        (rating,)
+    )
+
+    results = cursor.fetchall()
+    connection.close()
+
+    return results
+
+
+def search_by_min_rating(rating):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT name, genres, rating_percent, price
+        FROM games
+        WHERE rating_percent >= ?
+        ORDER BY rating_percent DESC
+        LIMIT 20
+        """,
+        (rating,)
+    )
+
+    results = cursor.fetchall()
+    connection.close()
+
+    return results
+
+def search_by_platform(platform):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT name, platforms, rating_percent, price
+        FROM games
+        WHERE platforms LIKE ?
+        ORDER BY rating_percent DESC
+        LIMIT 20
+        """,
+        (f"%{platform}%",)
+    )
+
+    results = cursor.fetchall()
+    connection.close()
+
+    return results
