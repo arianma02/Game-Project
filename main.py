@@ -6,12 +6,16 @@ from database import (
     search_by_platform
 )
 
+from recommendations import recommend_games
+
 print("Game Explorer")
 print("1. Search by name")
 print("2. Search by genre")
 print("3. Maximum price")
 print("4. Minimum rating")
 print("5. Platform")
+print("6. Recommend similar games")
+
 
 choice = input("Choose: ")
 
@@ -34,6 +38,20 @@ elif choice == "4":
 elif choice == "5":
     platform = input("Platform: ")
     results = search_by_platform(platform)
+
+elif choice == "6":
+    game_name = input("Enter a game you like: ")
+
+    results = recommend_games(game_name)
+
+    if not results:
+        print("Game not found.")
+    else:
+        for score, name, genres, rating, price in results:
+            print(
+                f"{name} | Rating: {rating:.1f}% | "
+                f"Price: £{price:.2f}"
+            )
 
 else:
     results = []
