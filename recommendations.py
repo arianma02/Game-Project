@@ -53,7 +53,7 @@ def recommend_games(game_name, limit=5):
 
         shared_genres = len(target_genres & genres)
         shared_tags = len(target_tags & tags)
-
+        # Give genre matches more weight than tag matches
         score = (
             shared_genres * 3
             + shared_tags * 2
@@ -62,7 +62,7 @@ def recommend_games(game_name, limit=5):
 
         if shared_genres > 0 or shared_tags > 0:
             recommendations.append(
-                (score, name, genres, rating, price)
+                (score, name, rating, price)
             )
 
     recommendations.sort(reverse=True)
